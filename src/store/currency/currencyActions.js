@@ -1,6 +1,8 @@
+import currencyTypes from './currencyTypes'
+
 export const setCurrencies = currencies => {
   return {
-    type: 'currencies/SET_CURRENCIES',
+    type: currencyTypes.SET_CURRENCIES,
     payload: currencies,
   }
 }

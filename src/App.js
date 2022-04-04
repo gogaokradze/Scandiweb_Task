@@ -38,7 +38,6 @@ class App extends React.Component {
     })
 
     this.props.setCurrencies(data.currencies)
-    console.log(this.props)
   }
 
   render() {
@@ -70,18 +69,12 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    cart: state.cart,
-    currencies: state.currencies,
-    data: state.data,
-  }
-}
+const mapStateToProps = state => ({
+  currencies: state.currency.currencies,
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setCurrencies: data => dispatch(setCurrencies(data)),
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  setCurrencies: data => dispatch(setCurrencies(data)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
