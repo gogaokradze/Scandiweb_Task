@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Header from '../../components/Header/Header'
 import Category from '../../components/Category/Category'
-import { connect } from 'react-redux'
 
-class WomanPage extends Component {
+class MenPage extends Component {
   render() {
     return (
       <>
         <Header />
         <Category
-          products={this?.props?.products[1]}
+          products={this?.props?.products[2]}
           currency={this?.props?.currency}
         />
       </>
@@ -25,4 +25,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({})
 
-export default connect(mapStateToProps, mapDispatchToProps)(WomanPage)
+export default connect(mapStateToProps, mapDispatchToProps)(MenPage)

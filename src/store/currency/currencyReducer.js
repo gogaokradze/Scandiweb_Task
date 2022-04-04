@@ -2,7 +2,7 @@ import currencyTypes from './currencyTypes'
 
 const initialState = {
   currencies: null,
-  currency: null,
+  currency: '$',
 }
 
 const currencyReducer = (state = initialState, action) => {
@@ -11,6 +11,11 @@ const currencyReducer = (state = initialState, action) => {
       return {
         ...state,
         currencies: action.payload,
+      }
+    case currencyTypes.SET_CURRENCY:
+      return {
+        ...state,
+        currency: action.payload,
       }
     default:
       return state

@@ -1,0 +1,12 @@
+.img{
+  width: 18rem;
+  height:18rem;
+}
+.main{
+  min-height: 90vh;
+}
+
+.products{
+  display: flex;
+  flex-wrap: 1;
+}

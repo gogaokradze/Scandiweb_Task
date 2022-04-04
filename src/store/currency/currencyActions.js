@@ -6,3 +6,10 @@ export const setCurrencies = currencies => {
     payload: currencies,
   }
 }
+
+export const setCurrency = currency => {
+  return {
+    type: currencyTypes.SET_CURRENCY,
+    payload: currency,
+  }
+}
