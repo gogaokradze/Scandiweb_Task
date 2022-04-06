@@ -1,0 +1,89 @@
+.img{
+  width:10rem;
+  height: 10rem;
+}
+.main{
+  display: flex;
+  width: 90%;
+  margin: 3rem auto;
+  justify-content: space-between;
+}
+
+.imgList{
+  width: 10rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.imgList button{
+  background:none;
+  border:none
+}
+.chosen{
+  max-width: 100%;
+  height: auto;
+}
+
+.div{
+  width:40%
+}
+
+.add{
+  width: 30%;
+}
+
+.choose{
+  border: 1px solid black;
+  width:fit-content;
+  margin: 0.5rem;
+}
+
+.flex{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.color{
+  width:3rem;
+  height: 3rem;
+  opacity: 0;
+  margin:0;
+}
+
+.attributes{
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid black;
+  margin:0.5rem;
+}
+.span{
+  display: block;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:-3.1rem;
+  pointer-events: none;
+  text-align: center;
+  height: inherit;
+}
+
+.attributes .color:checked ~ .attributes{
+  background-color: aquamarine;
+}
+.attributes input:checked ~ .span {
+  background-color: #1D1F22;
+  color:white;
+}
+
+.button{
+  background-color: #5ECE7B;
+  color:white;
+  border:none;
+  width: 15rem;
+  height: 3rem;
+}
+
+
+

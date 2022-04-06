@@ -4,9 +4,22 @@
 }
 .main{
   min-height: 90vh;
+  margin-bottom: 3rem;
 }
 
 .products{
+  width: 90%;
+  margin: 0 auto;
   display: flex;
-  flex-wrap: 1;
+  flex-direction: start;
+  flex-wrap:wrap;
+  flex-grow: 1;
+}
+
+.product{
+  margin: 1rem 3rem;
+}
+
+.title{
+  margin-left: 5rem;
 }
