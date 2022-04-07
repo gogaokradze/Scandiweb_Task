@@ -4,6 +4,7 @@ import { gql } from '@apollo/client'
 import client from '../../client'
 import classes from './Details.module.css'
 import { connect } from 'react-redux'
+import { setCart } from '../../store/cart/cartActions'
 
 class Details extends Component {
   constructor(props) {
@@ -57,10 +58,21 @@ class Details extends Component {
     e.preventDefault()
     const data = new FormData(e.target)
     let formObject = Object.fromEntries(data.entries())
-    console.log(formObject, this?.state?.data?.name)
+    const result = Object.keys(formObject).map(e => ({
+      type: e,
+      value: formObject[e],
+    }))
+    this.props.setCart({
+      attributes: result,
+      name: this.state.data?.name,
+      brand: this.state.data?.brand,
+      price: this.state.data.prices,
+      pic: this.state.data?.gallery[0],
+      count: 1,
+    })
   }
   render() {
-    const item = this?.state?.data
+    const item = this.state.data
     return (
       <div className={classes.main}>
         <div className={classes.imgList}>
@@ -81,13 +93,13 @@ class Details extends Component {
           ></img>
         </div>
         <div className={classes.add}>
-          <p>{item?.brand}</p>
-          <p>{item?.name}</p>
+          <p className={classes.brand}>{item?.brand}</p>
+          <p className={classes.name}>{item?.name}</p>
           <form onSubmit={this.handleOnSubmit}>
             {item?.attributes.map(({ items, name, type }, id) => {
               return (
                 <div key={id}>
-                  <p>{name}</p>
+                  <p className={classes.attributeName}>{name}:</p>
                   <div className={classes.flex}>
                     {items?.map(({ value }, id) => (
                       <div key={id}>
@@ -122,54 +134,56 @@ class Details extends Component {
                 </div>
               )
             })}
-            <p>PRICE:</p>
-            {(() => {
-              switch (this?.props?.currency) {
-                case '$': {
-                  return (
-                    <p>
-                      {item?.prices[0]?.currency.symbol}
-                      {item?.prices[0]?.amount}
-                    </p>
-                  )
+            <div className={classes.price}>
+              <p>PRICE:</p>
+              {(() => {
+                switch (this?.props?.currency) {
+                  case '$': {
+                    return (
+                      <p>
+                        {item?.prices[0]?.currency.symbol}
+                        {item?.prices[0]?.amount}
+                      </p>
+                    )
+                  }
+                  case '£': {
+                    return (
+                      <p>
+                        {item?.prices[1]?.currency.symbol}
+                        {item?.prices[1]?.amount}
+                      </p>
+                    )
+                  }
+                  case 'A$': {
+                    return (
+                      <p>
+                        {item?.prices[2]?.currency.symbol}
+                        {item?.prices[2]?.amount}
+                      </p>
+                    )
+                  }
+                  case '¥': {
+                    return (
+                      <p>
+                        {item?.prices[3]?.currency.symbol}
+                        {item?.prices[3]?.amount}
+                      </p>
+                    )
+                  }
+                  case '₽': {
+                    return (
+                      <p>
+                        {item?.prices[4]?.currency.symbol}
+                        {item?.prices[4]?.amount}
+                      </p>
+                    )
+                  }
+                  default: {
+                    return <p>Bye</p>
+                  }
                 }
-                case '£': {
-                  return (
-                    <p>
-                      {item?.prices[1]?.currency.symbol}
-                      {item?.prices[1]?.amount}
-                    </p>
-                  )
-                }
-                case 'A$': {
-                  return (
-                    <p>
-                      {item?.prices[2]?.currency.symbol}
-                      {item?.prices[2]?.amount}
-                    </p>
-                  )
-                }
-                case '¥': {
-                  return (
-                    <p>
-                      {item?.prices[3]?.currency.symbol}
-                      {item?.prices[3]?.amount}
-                    </p>
-                  )
-                }
-                case '₽': {
-                  return (
-                    <p>
-                      {item?.prices[4]?.currency.symbol}
-                      {item?.prices[4]?.amount}
-                    </p>
-                  )
-                }
-                default: {
-                  return <p>Bye</p>
-                }
-              }
-            })()}
+              })()}
+            </div>
             <button className={classes.button} type='submit'>
               ADD TO CART
             </button>
@@ -185,4 +199,8 @@ const mapStateToProps = state => ({
   currency: state.currency.currency,
 })
 
-export default connect(mapStateToProps)(withRouter(Details))
+const mapDispatchToProps = dispatch => ({
+  setCart: data => dispatch(setCart(data)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Details))

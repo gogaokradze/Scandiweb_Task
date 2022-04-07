@@ -23,3 +23,16 @@
 .title{
   margin-left: 5rem;
 }
+
+.link{
+  text-decoration: none;
+  color:#1D1F22;
+}
+
+.name{
+  font-weight: 300;
+}
+
+.product p{
+  font-size: 1rem;
+}

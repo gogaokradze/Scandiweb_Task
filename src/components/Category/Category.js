@@ -13,14 +13,18 @@ class Category extends Component {
           {this?.props?.products?.products?.map(
             ({ name, prices, gallery, id }, count) => {
               return (
-                <Link to={`${location.pathname}/${id}`} key={count}>
+                <Link
+                  className={classes.link}
+                  to={`${location.pathname}/${id}`}
+                  key={count}
+                >
                   <div className={classes.product}>
                     <img
                       src={gallery[0]}
                       alt={name}
                       className={classes.img}
                     ></img>
-                    <p>{name}</p>
+                    <p className={classes.name}>{name}</p>
                     {(() => {
                       switch (this?.props?.currency) {
                         case '$': {
