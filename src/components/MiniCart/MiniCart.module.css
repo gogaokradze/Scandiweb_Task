@@ -7,9 +7,10 @@
 .miniCart{
    position: absolute;
    right: 9rem;
-   z-index: 1;
-   border:1px solid black;
+   z-index: 2;
    background-color: white;
+   width: 15rem;
+   margin-top: 1rem;
 }
 
 .img{
@@ -64,7 +65,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width:35%
+  width:35%;
+  margin-left: 0.3rem;
 }
 
 .product p{
@@ -100,3 +102,46 @@
 .title span{
   font-weight: 900;
 }
+
+.finalPrice{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.finalPrice p {
+  margin-top: 0;
+}
+
+.buttonDiv{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto 1rem auto;
+}
+
+.checkout{
+  background: #5ECE7B;
+  border:none;
+  color: white;
+  width: 40%;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.bag{
+  background: none;
+  border: 1px solid #1D1F22;
+  width: 40%;
+  height: 2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color:#1D1F22;
+  font-size: 0.8rem;
+  box-sizing: border-box;
+}
+

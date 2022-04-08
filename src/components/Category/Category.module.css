@@ -1,10 +1,11 @@
 .img{
-  width: 18rem;
   height:18rem;
+  margin: 0 auto;
+  mix-blend-mode: darken;
 }
 .main{
   min-height: 90vh;
-  margin-bottom: 3rem;
+  padding-bottom: 3rem;
 }
 
 .products{
@@ -17,16 +18,23 @@
 }
 
 .product{
-  margin: 1rem 3rem;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .title{
   margin-left: 5rem;
+  margin-top: 0;
+  padding-top: 2rem;
 }
 
 .link{
   text-decoration: none;
   color:#1D1F22;
+  margin: 1rem 3rem;
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .name{
@@ -35,4 +43,27 @@
 
 .product p{
   font-size: 1rem;
+}
+
+.noStock{
+  opacity: 0.5;
+  
+}
+.noStock::after{
+  content: 'OUT OF STOCK';
+}
+
+.message{
+  width: inherit;
+  text-align: center;
+  position: absolute;
+  margin-top:-10rem;
+  margin-left:5rem;
+  color:#8D8F9A;
+}
+
+.active{
+  position: relative;
+  z-index: 1;
+  background: rgba(57, 55, 72, 0.22);
 }

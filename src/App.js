@@ -10,6 +10,7 @@ import WomenPage from './pages/WomanPage/WomanPage'
 import MenPage from './pages/MenPage/MenPage'
 import KidsPage from './pages/KidsPage/KidsPage'
 import DetailsPage from './pages/DetailsPage/DetailsPage'
+import CartPage from './pages/CartPage/CartPage'
 import { connect } from 'react-redux'
 import { gql } from '@apollo/client'
 import client from './client'
@@ -75,6 +76,9 @@ class App extends React.Component {
           </Route>
           <Route path='/kids' exact>
             <KidsPage />
+          </Route>
+          <Route path='/cart' exact>
+            <CartPage />
           </Route>
           <Route path={`/*/:id`} exact>
             <DetailsPage />

@@ -1,47 +1,27 @@
 import React, { Component } from 'react'
+import Header from '../../components/Header/Header'
 import { connect } from 'react-redux'
-import {
-  setCart,
-  addCount,
-  decCount,
-  setPrice,
-  togCart,
-} from '../../store/cart/cartActions'
-import { Cart } from '../../svg/icons'
-import classes from './MiniCart.module.css'
-import { Link } from 'react-router-dom'
+import classes from './CartPage.module.css'
+import { addCount, decCount } from '../../store/cart/cartActions'
 
-class MiniCart extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showCart: false,
-      finalPrice: 0,
-    }
-  }
-  componentDidUpdate() {
-    this.props.calcPrice(this.props.currency)
-  }
+class CartPage extends Component {
   render() {
     return (
       <div>
-        <button className={classes.button} onClick={() => this.props.togCart()}>
-          <Cart />
-          {this.props.cart?.length > 0 && (
-            <div className={classes.counter}>{this.props.cart?.length}</div>
-          )}
-        </button>
-        {this.props.active && (
-          <div className={classes.miniCart}>
-            <p className={classes.title}>
-              <span>My Bag</span>, {this.props.cart?.length} items
-            </p>
+        <Header />
+        <div
+          className={`${classes.main} ${
+            this.props.active ? `${classes.active}` : ''
+          }`}
+        >
+          <div className={classes.cart}>
+            <h1>CART</h1>
             {this.props.cart?.map(
               ({ name, brand, pic, price, attributes, count }, id) => (
                 <div key={id} className={classes.products}>
                   <div className={classes.product}>
+                    <p className={classes.brand}>{brand}</p>
                     <p className={classes.name}>{name}</p>
-                    <p className={classes.name}>{brand}</p>
                     {(() => {
                       switch (this?.props?.currency) {
                         case '$': {
@@ -106,49 +86,39 @@ class MiniCart extends Component {
                       ))}
                     </div>
                   </div>
-                  <div className={classes.buttons}>
-                    <button
-                      onClick={() =>
-                        this.props.addCount({
-                          name: name,
-                          attributes: attributes,
-                        })
-                      }
-                    >
-                      +
-                    </button>
-                    <p>{count}</p>
-                    <button
-                      onClick={() =>
-                        this.props.decCount({
-                          name: name,
-                          attributes: attributes,
-                        })
-                      }
-                    >
-                      -
-                    </button>
-                  </div>
-                  <div className={classes.imgContainer}>
-                    <img className={classes.img} src={pic} alt='product' />
+                  <div className={classes.group}>
+                    <div className={classes.buttons}>
+                      <button
+                        onClick={() =>
+                          this.props.addCount({
+                            name: name,
+                            attributes: attributes,
+                          })
+                        }
+                      >
+                        +
+                      </button>
+                      <p>{count}</p>
+                      <button
+                        onClick={() =>
+                          this.props.decCount({
+                            name: name,
+                            attributes: attributes,
+                          })
+                        }
+                      >
+                        -
+                      </button>
+                    </div>
+                    <div className={classes.imgContainer}>
+                      <img className={classes.img} src={pic} alt='product' />
+                    </div>
                   </div>
                 </div>
               ),
             )}
-            <div className={classes.finalPrice}>
-              <p>Total</p>
-              <p>
-                {this.props.currency} {this.props.finalPrice}
-              </p>
-            </div>
-            <div className={classes.buttonDiv}>
-              <Link className={classes.bag} to='/cart'>
-                VIEW BAG
-              </Link>
-              <button className={classes.checkout}>CHECK OUT</button>
-            </div>
           </div>
-        )}
+        </div>
       </div>
     )
   }
@@ -162,11 +132,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setCart: data => dispatch(setCart(data)),
   addCount: data => dispatch(addCount(data)),
   decCount: data => dispatch(decCount(data)),
-  calcPrice: data => dispatch(setPrice(data)),
-  togCart: data => dispatch(togCart(data)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MiniCart)
+export default connect(mapStateToProps, mapDispatchToProps)(CartPage)

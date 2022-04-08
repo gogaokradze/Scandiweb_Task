@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
 import classes from './Category.module.css'
 import { withRouter, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class Category extends Component {
   render() {
     const { location } = this.props
     return (
-      <div className={classes.main}>
+      <div
+        className={`${classes.main} ${
+          this.props.active ? `${classes.active}` : ''
+        }`}
+      >
         <h1 className={classes.title}>{this?.props?.products?.name}</h1>
 
         <div className={classes.products}>
           {this?.props?.products?.products?.map(
-            ({ name, prices, gallery, id }, count) => {
+            ({ name, prices, gallery, id, inStock }, count) => {
               return (
                 <Link
                   className={classes.link}
@@ -22,8 +27,13 @@ class Category extends Component {
                     <img
                       src={gallery[0]}
                       alt={name}
-                      className={classes.img}
+                      className={`${classes.img} ${
+                        !inStock ? `${classes.noStock}` : ''
+                      }`}
                     ></img>
+                    {!inStock && (
+                      <p className={classes.message}>OUT OF STOCK</p>
+                    )}
                     <p className={classes.name}>{name}</p>
                     {(() => {
                       switch (this?.props?.currency) {
@@ -78,4 +88,6 @@ class Category extends Component {
   }
 }
 
-export default withRouter(Category)
+const mapStateToProps = state => ({ active: state.cart.active })
+
+export default connect(mapStateToProps)(withRouter(Category))
