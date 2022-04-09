@@ -145,3 +145,22 @@
   box-sizing: border-box;
 }
 
+@media screen and (min-width: 1440px) {
+  .miniCart {
+    font-size:1rem;
+    padding-top:1rem;
+  }
+  .product p{
+    font-size: 1rem;
+    margin:0.7rem auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+ .miniCart {
+   padding-top:2rem;
+   right:10%;
+   width: 13rem;
+ }
+}
+

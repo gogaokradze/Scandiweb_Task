@@ -53,7 +53,19 @@
 .cartDiv{
   display:flex;
   padding-left: 5rem;
-  
+}
+
+@media screen and (max-width: 800px) {
+  .header{
+    font-size: 0.8rem;
+    max-width: 90vw;
+  }
+ .nav {
+   width:40%
+ }
+ .cartDiv{
+   padding:0;
+ }
 }
 
 

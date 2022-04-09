@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  setCart,
-  addCount,
-  decCount,
+  incrementCount,
+  decrementCount,
   setPrice,
-  togCart,
+  toggleCart,
+  removeCart,
 } from '../../store/cart/cartActions'
 import { Cart } from '../../svg/icons'
 import classes from './MiniCart.module.css'
@@ -25,7 +25,10 @@ class MiniCart extends Component {
   render() {
     return (
       <div>
-        <button className={classes.button} onClick={() => this.props.togCart()}>
+        <button
+          className={classes.button}
+          onClick={() => this.props.toggleCart()}
+        >
           <Cart />
           {this.props.cart?.length > 0 && (
             <div className={classes.counter}>{this.props.cart?.length}</div>
@@ -109,7 +112,7 @@ class MiniCart extends Component {
                   <div className={classes.buttons}>
                     <button
                       onClick={() =>
-                        this.props.addCount({
+                        this.props.incrementCount({
                           name: name,
                           attributes: attributes,
                         })
@@ -120,7 +123,7 @@ class MiniCart extends Component {
                     <p>{count}</p>
                     <button
                       onClick={() =>
-                        this.props.decCount({
+                        this.props.decrementCount({
                           name: name,
                           attributes: attributes,
                         })
@@ -145,7 +148,17 @@ class MiniCart extends Component {
               <Link className={classes.bag} to='/cart'>
                 VIEW BAG
               </Link>
-              <button className={classes.checkout}>CHECK OUT</button>
+              <button
+                className={classes.checkout}
+                onClick={() => {
+                  if (this.props.cart.length > 0) {
+                    this.props.removeCart()
+                    alert('Purchased')
+                  }
+                }}
+              >
+                CHECK OUT
+              </button>
             </div>
           </div>
         )}
@@ -162,11 +175,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setCart: data => dispatch(setCart(data)),
-  addCount: data => dispatch(addCount(data)),
-  decCount: data => dispatch(decCount(data)),
+  incrementCount: data => dispatch(incrementCount(data)),
+  decrementCount: data => dispatch(decrementCount(data)),
   calcPrice: data => dispatch(setPrice(data)),
-  togCart: data => dispatch(togCart(data)),
+  toggleCart: data => dispatch(toggleCart(data)),
+  removeCart: data => dispatch(removeCart(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MiniCart)

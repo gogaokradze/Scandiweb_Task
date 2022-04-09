@@ -98,107 +98,112 @@ class Details extends Component {
             ></img>
           </div>
           <div className={classes.add}>
-            <p className={classes.brand}>{item?.brand}</p>
-            <p className={classes.name}>{item?.name}</p>
-            <form onSubmit={this.handleOnSubmit}>
-              {item?.attributes.map(({ items, name, type }, id) => {
-                return (
-                  <div key={id}>
-                    <p className={classes.attributeName}>{name}:</p>
-                    <div className={classes.flex}>
-                      {items?.map(({ value }, id) => (
-                        <div key={id}>
-                          {type === 'swatch' ? (
-                            <div
-                              style={{ backgroundColor: value }}
-                              className={classes.choose}
-                            >
-                              <input
-                                className={classes.color}
-                                type='radio'
-                                name={name}
-                                value={value}
-                                required
-                              ></input>
-                              <span className={classes.span}></span>
-                            </div>
-                          ) : (
-                            <div className={classes.attributes}>
-                              <input
-                                className={classes.color}
-                                type='radio'
-                                name={name}
-                                value={value}
-                                required
-                              ></input>
-                              <span className={classes.span}>{value}</span>
-                            </div>
-                          )}
-                        </div>
-                      ))}
+            <div>
+              <p className={classes.brand}>{item?.brand}</p>
+              <p className={classes.name}>{item?.name}</p>
+              <form onSubmit={this.handleOnSubmit}>
+                {item?.attributes.map(({ items, name, type }, id) => {
+                  return (
+                    <div key={id}>
+                      <p className={classes.attributeName}>{name}:</p>
+                      <div className={classes.flex}>
+                        {items?.map(({ value }, id) => (
+                          <div key={id}>
+                            {type === 'swatch' ? (
+                              <div
+                                style={{ backgroundColor: value }}
+                                className={classes.choose}
+                              >
+                                <input
+                                  className={classes.color}
+                                  type='radio'
+                                  name={name}
+                                  value={value}
+                                  required
+                                ></input>
+                                <span className={classes.span}></span>
+                              </div>
+                            ) : (
+                              <div className={classes.attributes}>
+                                <input
+                                  className={classes.color}
+                                  type='radio'
+                                  name={name}
+                                  value={value}
+                                  required
+                                ></input>
+                                <span className={classes.span}>{value}</span>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )
-              })}
-              <div className={classes.price}>
-                <p>PRICE:</p>
-                {(() => {
-                  switch (this?.props?.currency) {
-                    case '$': {
-                      return (
-                        <p>
-                          {item?.prices[0]?.currency.symbol}
-                          {item?.prices[0]?.amount}
-                        </p>
-                      )
+                  )
+                })}
+                <div className={classes.price}>
+                  <p>PRICE:</p>
+                  {(() => {
+                    switch (this?.props?.currency) {
+                      case '$': {
+                        return (
+                          <p>
+                            {item?.prices[0]?.currency.symbol}
+                            {item?.prices[0]?.amount}
+                          </p>
+                        )
+                      }
+                      case '£': {
+                        return (
+                          <p>
+                            {item?.prices[1]?.currency.symbol}
+                            {item?.prices[1]?.amount}
+                          </p>
+                        )
+                      }
+                      case 'A$': {
+                        return (
+                          <p>
+                            {item?.prices[2]?.currency.symbol}
+                            {item?.prices[2]?.amount}
+                          </p>
+                        )
+                      }
+                      case '¥': {
+                        return (
+                          <p>
+                            {item?.prices[3]?.currency.symbol}
+                            {item?.prices[3]?.amount}
+                          </p>
+                        )
+                      }
+                      case '₽': {
+                        return (
+                          <p>
+                            {item?.prices[4]?.currency.symbol}
+                            {item?.prices[4]?.amount}
+                          </p>
+                        )
+                      }
+                      default: {
+                        return <p>Bye</p>
+                      }
                     }
-                    case '£': {
-                      return (
-                        <p>
-                          {item?.prices[1]?.currency.symbol}
-                          {item?.prices[1]?.amount}
-                        </p>
-                      )
-                    }
-                    case 'A$': {
-                      return (
-                        <p>
-                          {item?.prices[2]?.currency.symbol}
-                          {item?.prices[2]?.amount}
-                        </p>
-                      )
-                    }
-                    case '¥': {
-                      return (
-                        <p>
-                          {item?.prices[3]?.currency.symbol}
-                          {item?.prices[3]?.amount}
-                        </p>
-                      )
-                    }
-                    case '₽': {
-                      return (
-                        <p>
-                          {item?.prices[4]?.currency.symbol}
-                          {item?.prices[4]?.amount}
-                        </p>
-                      )
-                    }
-                    default: {
-                      return <p>Bye</p>
-                    }
-                  }
-                })()}
-              </div>
-              <button
-                className={classes.button}
-                disabled={!item?.inStock}
-                type='submit'
-              >
-                ADD TO CART
-              </button>
-            </form>
-            <p dangerouslySetInnerHTML={{ __html: item?.description }}></p>
+                  })()}
+                </div>
+                <button
+                  className={classes.button}
+                  disabled={!item?.inStock}
+                  type='submit'
+                >
+                  ADD TO CART
+                </button>
+              </form>
+              <p
+                className={classes.description}
+                dangerouslySetInnerHTML={{ __html: item?.description }}
+              ></p>
+            </div>
           </div>
         </div>
       </div>
@@ -206,7 +211,6 @@ class Details extends Component {
   }
 }
 const mapStateToProps = state => ({
-  currencies: state.currency.currencies,
   currency: state.currency.currency,
   active: state.cart.active,
 })

@@ -1,9 +1,10 @@
 const cartTypes = {
   SET_CART: 'cart/SET_CART',
-  ADD_COUNT: 'cart/ADD_COUNT',
-  DEC_COUNT: 'cart/DEC_COUNT',
+  INCREMENT_COUNT: 'cart/INCREMENT_COUNT',
+  DECREMENT_COUNT: 'cart/DECREMENT_COUNT',
   SET_PRICE: 'cart/SET_PRICE',
-  TOG_CART: 'cart/TOG_CART',
+  TOGGLE_CART: 'cart/TOGGLE_CART',
+  REMOVE_CART: 'cart/REMOVE_CART',
 }
 
 export default cartTypes

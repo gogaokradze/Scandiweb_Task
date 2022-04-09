@@ -26,6 +26,7 @@
   margin-left: 5rem;
   margin-top: 0;
   padding-top: 2rem;
+  text-transform: capitalize;
 }
 
 .link{
@@ -66,4 +67,19 @@
   position: relative;
   z-index: 1;
   background: rgba(57, 55, 72, 0.22);
+}
+
+@media screen and (max-width: 800px) {
+  .products{
+    justify-content: center;
+  }
+  .title{
+    margin-left:3rem;
+  }
+  .link{
+    margin:0;
+  }
+  .img{
+    width: 16rem;
+  }
 }

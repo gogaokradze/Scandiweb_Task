@@ -27,7 +27,7 @@ const currencyReducer = (state = initialState, action) => {
           cart: [...state.cart, action.payload],
         }
       }
-    case cartTypes.ADD_COUNT:
+    case cartTypes.INCREMENT_COUNT:
       const index = state.cart.findIndex(
         product =>
           product.name === action.payload.name &&
@@ -40,7 +40,7 @@ const currencyReducer = (state = initialState, action) => {
         ...state,
         cart: newArray,
       }
-    case cartTypes.DEC_COUNT:
+    case cartTypes.DECREMENT_COUNT:
       const index2 = state.cart.findIndex(
         product =>
           product.name === action.payload.name &&
@@ -85,8 +85,10 @@ const currencyReducer = (state = initialState, action) => {
         finalPrice += actualPrice * count
       })
       return { ...state, finalPrice: finalPrice.toFixed(2) }
-    case cartTypes.TOG_CART:
+    case cartTypes.TOGGLE_CART:
       return { ...state, active: !state.active }
+    case cartTypes.REMOVE_CART:
+      return { ...state, cart: [] }
     default:
       return state
   }

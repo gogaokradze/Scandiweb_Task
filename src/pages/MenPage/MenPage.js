@@ -9,8 +9,8 @@ class MenPage extends Component {
       <>
         <Header />
         <Category
-          products={this?.props?.products[2]}
-          currency={this?.props?.currency}
+          products={this.props?.products[2]}
+          currency={this.props?.currency}
         />
       </>
     )
@@ -18,11 +18,8 @@ class MenPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  currencies: state.currency.currencies,
   currency: state.currency.currency,
   products: state.products,
 })
 
-const mapDispatchToProps = dispatch => ({})
-
-export default connect(mapStateToProps, mapDispatchToProps)(MenPage)
+export default connect(mapStateToProps)(MenPage)

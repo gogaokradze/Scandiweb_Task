@@ -7,16 +7,16 @@ export const setCart = data => {
   }
 }
 
-export const addCount = data => {
+export const incrementCount = data => {
   return {
-    type: cartTypes.ADD_COUNT,
+    type: cartTypes.INCREMENT_COUNT,
     payload: data,
   }
 }
 
-export const decCount = data => {
+export const decrementCount = data => {
   return {
-    type: cartTypes.DEC_COUNT,
+    type: cartTypes.DECREMENT_COUNT,
     payload: data,
   }
 }
@@ -28,9 +28,16 @@ export const setPrice = data => {
   }
 }
 
-export const togCart = data => {
+export const toggleCart = data => {
   return {
-    type: cartTypes.TOG_CART,
+    type: cartTypes.TOGGLE_CART,
+    payload: data,
+  }
+}
+
+export const removeCart = data => {
+  return {
+    type: cartTypes.REMOVE_CART,
     payload: data,
   }
 }

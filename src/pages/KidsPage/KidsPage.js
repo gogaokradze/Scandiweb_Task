@@ -9,8 +9,8 @@ class KidsPage extends Component {
       <>
         <Header />
         <Category
-          products={this?.props?.products[0]}
-          currency={this?.props?.currency}
+          products={this.props?.products[0]}
+          currency={this.props?.currency}
         />
       </>
     )
@@ -18,11 +18,8 @@ class KidsPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  currencies: state.currency.currencies,
   currency: state.currency.currency,
   products: state.products,
 })
 
-const mapDispatchToProps = dispatch => ({})
-
-export default connect(mapStateToProps, mapDispatchToProps)(KidsPage)
+export default connect(mapStateToProps)(KidsPage)

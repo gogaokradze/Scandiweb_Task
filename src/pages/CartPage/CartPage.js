@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Header from '../../components/Header/Header'
 import { connect } from 'react-redux'
 import classes from './CartPage.module.css'
-import { addCount, decCount } from '../../store/cart/cartActions'
+import { incrementCount, decrementCount } from '../../store/cart/cartActions'
 
 class CartPage extends Component {
   render() {
@@ -16,6 +16,9 @@ class CartPage extends Component {
         >
           <div className={classes.cart}>
             <h1>CART</h1>
+            {this.props.cart.length === 0 && (
+              <h1 className={classes.message}>Cart is empty</h1>
+            )}
             {this.props.cart?.map(
               ({ name, brand, pic, price, attributes, count }, id) => (
                 <div key={id} className={classes.products}>
@@ -90,7 +93,7 @@ class CartPage extends Component {
                     <div className={classes.buttons}>
                       <button
                         onClick={() =>
-                          this.props.addCount({
+                          this.props.incrementCount({
                             name: name,
                             attributes: attributes,
                           })
@@ -101,7 +104,7 @@ class CartPage extends Component {
                       <p>{count}</p>
                       <button
                         onClick={() =>
-                          this.props.decCount({
+                          this.props.decrementCount({
                             name: name,
                             attributes: attributes,
                           })
@@ -127,13 +130,12 @@ class CartPage extends Component {
 const mapStateToProps = state => ({
   currency: state.currency.currency,
   cart: state.cart.cart,
-  finalPrice: state.cart.finalPrice,
   active: state.cart.active,
 })
 
 const mapDispatchToProps = dispatch => ({
-  addCount: data => dispatch(addCount(data)),
-  decCount: data => dispatch(decCount(data)),
+  incrementCount: data => dispatch(incrementCount(data)),
+  decrementCount: data => dispatch(decrementCount(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartPage)

@@ -37,6 +37,12 @@
 
 }
 
+.message{
+   color:#8D8F9A;
+   text-align: center;
+   padding-top:10rem;
+}
+
 .active{
   position: relative;
   z-index: 1;
@@ -53,6 +59,8 @@
 .group{
   display: flex;
 }
+
+
 
 .buttons{
   display: flex;
@@ -98,6 +106,25 @@
   margin-bottom:1rem;
 }
 
+@media screen and (min-width: 1440px) {
+  .main{
+    font-size:1.5rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .buttons {
+    justify-content: space-between;
+    margin: 0 1rem;
+  }
+  .img{
+    height: 9rem;
+  }
+  .imgContainer{
+    width: 9rem;
+  }
+
+ }
 
 
 
