@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import classes from './Category.module.css'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { AddCart } from '../../svg/icons'
 
 class Category extends Component {
   render() {
@@ -31,6 +32,10 @@ class Category extends Component {
                         !inStock ? `${classes.noStock}` : ''
                       }`}
                     ></img>
+                    <button className={classes.addButton}>
+                      <AddCart />
+                    </button>
+
                     {!inStock && (
                       <p className={classes.message}>OUT OF STOCK</p>
                     )}

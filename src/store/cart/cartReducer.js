@@ -10,16 +10,19 @@ const initialState = {
 const currencyReducer = (state = initialState, action) => {
   switch (action.type) {
     case cartTypes.SET_CART:
-      const match = state.cart.find(product => {
+      const match = state.cart.findIndex(product => {
         return (
           product.name === action.payload.name &&
           equal(product.attributes, action.payload.attributes)
         )
       })
 
-      if (match) {
+      if (match >= 0) {
+        const array = [...state.cart]
+        array[match].count += 1
         return {
           ...state,
+          cart: array,
         }
       } else {
         return {

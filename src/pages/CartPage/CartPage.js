@@ -3,8 +3,15 @@ import Header from '../../components/Header/Header'
 import { connect } from 'react-redux'
 import classes from './CartPage.module.css'
 import { incrementCount, decrementCount } from '../../store/cart/cartActions'
+import { Back, Next } from '../../svg/icons'
 
 class CartPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentPicture: 0,
+    }
+  }
   render() {
     return (
       <div>
@@ -31,7 +38,7 @@ class CartPage extends Component {
                           return (
                             <p>
                               {price[0]?.currency.symbol}
-                              {(price[0]?.amount * count).toFixed(2)}
+                              {(price[0]?.amount).toFixed(2)}
                             </p>
                           )
                         }
@@ -39,7 +46,7 @@ class CartPage extends Component {
                           return (
                             <p>
                               {price[1]?.currency.symbol}
-                              {(price[1]?.amount * count).toFixed(2)}
+                              {(price[1]?.amount).toFixed(2)}
                             </p>
                           )
                         }
@@ -47,7 +54,7 @@ class CartPage extends Component {
                           return (
                             <p>
                               {price[2]?.currency.symbol}
-                              {(price[2]?.amount * count).toFixed(2)}
+                              {(price[2]?.amount).toFixed(2)}
                             </p>
                           )
                         }
@@ -55,7 +62,7 @@ class CartPage extends Component {
                           return (
                             <p>
                               {price[3]?.currency.symbol}
-                              {(price[3]?.amount * count).toFixed(2)}
+                              {(price[3]?.amount).toFixed(2)}
                             </p>
                           )
                         }
@@ -63,7 +70,7 @@ class CartPage extends Component {
                           return (
                             <p>
                               {price[4]?.currency.symbol}
-                              {(price[4]?.amount * count).toFixed(2)}
+                              {(price[4]?.amount).toFixed(2)}
                             </p>
                           )
                         }
@@ -114,7 +121,49 @@ class CartPage extends Component {
                       </button>
                     </div>
                     <div className={classes.imgContainer}>
-                      <img className={classes.img} src={pic} alt='product' />
+                      <img
+                        className={classes.img}
+                        src={pic[this.state.currentPicture]}
+                        alt='product'
+                      />
+                      <div className={classes.imgSwitcher}>
+                        <button
+                          onClick={() => {
+                            this.setState(prevState => {
+                              if (prevState.currentPicture === 0) {
+                                return {
+                                  currentPicture: pic.length - 1,
+                                }
+                              } else {
+                                return {
+                                  currentPicture:
+                                    (prevState.currentPicture -= 1),
+                                }
+                              }
+                            })
+                          }}
+                        >
+                          <Back />
+                        </button>
+                        <button
+                          onClick={() => {
+                            this.setState(prevState => {
+                              if (prevState.currentPicture < pic.length - 1) {
+                                return {
+                                  currentPicture:
+                                    (prevState.currentPicture += 1),
+                                }
+                              } else {
+                                return {
+                                  currentPicture: 0,
+                                }
+                              }
+                            })
+                          }}
+                        >
+                          <Next />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -47,6 +47,20 @@
   position: relative;
   z-index: 1;
   background: rgba(57, 55, 72, 0.22);
+  pointer-events: none;
+}
+
+.imgSwitcher{
+  position: absolute;
+  width: inherit;
+  display: flex;
+  justify-content: space-between;
+}
+
+.imgSwitcher button{
+  background: none;
+  border:none;
+  cursor: pointer;
 }
 
 .imgContainer{

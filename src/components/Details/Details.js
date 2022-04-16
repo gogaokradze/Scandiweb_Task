@@ -67,7 +67,7 @@ class Details extends Component {
       name: this.state.data?.name,
       brand: this.state.data?.brand,
       price: this.state.data.prices,
-      pic: this.state.data?.gallery[0],
+      pic: this.state.data?.gallery,
       count: 1,
     })
   }
@@ -86,16 +86,25 @@ class Details extends Component {
                 key={id}
                 onClick={() => this.setState({ currentPicture: link })}
               >
-                <img className={classes.img} src={link} alt='product'></img>
+                <img
+                  className={`${classes.img} ${
+                    !item?.inStock ? `${classes.noStock}` : ''
+                  }`}
+                  src={link}
+                  alt='product'
+                ></img>
               </button>
             ))}
           </div>
           <div className={classes.div}>
             <img
-              className={classes.chosen}
+              className={`${classes.chosen} ${
+                !item?.inStock ? `${classes.noStock}` : ''
+              }`}
               src={this.state.currentPicture}
               alt='currentPic'
             ></img>
+            {!item?.inStock && <p className={classes.message}>OUT OF STOCK</p>}
           </div>
           <div className={classes.add}>
             <div>

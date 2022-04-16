@@ -14,17 +14,30 @@ import { Link } from 'react-router-dom'
 class MiniCart extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      showCart: false,
-      finalPrice: 0,
+    this.ref = React.createRef()
+    this.handleClickOutside = this.handleClickOutside.bind(this)
+  }
+
+  handleClickOutside(event) {
+    if (this.ref.current && !this.ref.current.contains(event.target)) {
+      if (this.props.active) this.props.toggleCart(false)
     }
   }
+
+  componentDidMount() {
+    document.addEventListener('click', this.handleClickOutside, true)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickOutside, true)
+  }
+
   componentDidUpdate() {
     this.props.calcPrice(this.props.currency)
   }
   render() {
     return (
-      <div>
+      <div ref={this.ref}>
         <button
           className={classes.button}
           onClick={() => this.props.toggleCart()}
@@ -35,109 +48,111 @@ class MiniCart extends Component {
           )}
         </button>
         {this.props.active && (
-          <div className={classes.miniCart}>
+          <div className={classes.miniCart} id='miniCart'>
             <p className={classes.title}>
               <span>My Bag</span>, {this.props.cart?.length} items
             </p>
-            {this.props.cart?.map(
-              ({ name, brand, pic, price, attributes, count }, id) => (
-                <div key={id} className={classes.products}>
-                  <div className={classes.product}>
-                    <p className={classes.name}>{name}</p>
-                    <p className={classes.name}>{brand}</p>
-                    {(() => {
-                      switch (this?.props?.currency) {
-                        case '$': {
-                          return (
-                            <p>
-                              {price[0]?.currency.symbol}
-                              {(price[0]?.amount * count).toFixed(2)}
-                            </p>
-                          )
+            <div className={classes.something}>
+              {this.props.cart?.map(
+                ({ name, brand, pic, price, attributes, count }, id) => (
+                  <div key={id} className={classes.products}>
+                    <div className={classes.product}>
+                      <p className={classes.name}>{name}</p>
+                      <p className={classes.name}>{brand}</p>
+                      {(() => {
+                        switch (this?.props?.currency) {
+                          case '$': {
+                            return (
+                              <p>
+                                {price[0]?.currency.symbol}
+                                {(price[0]?.amount).toFixed(2)}
+                              </p>
+                            )
+                          }
+                          case '£': {
+                            return (
+                              <p>
+                                {price[1]?.currency.symbol}
+                                {(price[1]?.amount).toFixed(2)}
+                              </p>
+                            )
+                          }
+                          case 'A$': {
+                            return (
+                              <p>
+                                {price[2]?.currency.symbol}
+                                {(price[2]?.amount).toFixed(2)}
+                              </p>
+                            )
+                          }
+                          case '¥': {
+                            return (
+                              <p>
+                                {price[3]?.currency.symbol}
+                                {(price[3]?.amount).toFixed(2)}
+                              </p>
+                            )
+                          }
+                          case '₽': {
+                            return (
+                              <p>
+                                {price[4]?.currency.symbol}
+                                {(price[4]?.amount).toFixed(2)}
+                              </p>
+                            )
+                          }
+                          default: {
+                            return <p>Bye</p>
+                          }
                         }
-                        case '£': {
-                          return (
-                            <p>
-                              {price[1]?.currency.symbol}
-                              {(price[1]?.amount * count).toFixed(2)}
-                            </p>
-                          )
+                      })()}
+                      <div className={classes.chosenAttributes}>
+                        {attributes.map(({ type, value }, id) => (
+                          <div key={id}>
+                            {type === 'Color' ? (
+                              <div
+                                style={{ backgroundColor: value }}
+                                className={classes.attributes}
+                              ></div>
+                            ) : (
+                              <div className={classes.attributes}>
+                                <span>{value}</span>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className={classes.buttons}>
+                      <button
+                        onClick={() =>
+                          this.props.incrementCount({
+                            name: name,
+                            attributes: attributes,
+                          })
                         }
-                        case 'A$': {
-                          return (
-                            <p>
-                              {price[2]?.currency.symbol}
-                              {(price[2]?.amount * count).toFixed(2)}
-                            </p>
-                          )
+                      >
+                        +
+                      </button>
+                      <p>{count}</p>
+                      <button
+                        onClick={() =>
+                          this.props.decrementCount({
+                            name: name,
+                            attributes: attributes,
+                          })
                         }
-                        case '¥': {
-                          return (
-                            <p>
-                              {price[3]?.currency.symbol}
-                              {(price[3]?.amount * count).toFixed(2)}
-                            </p>
-                          )
-                        }
-                        case '₽': {
-                          return (
-                            <p>
-                              {price[4]?.currency.symbol}
-                              {(price[4]?.amount * count).toFixed(2)}
-                            </p>
-                          )
-                        }
-                        default: {
-                          return <p>Bye</p>
-                        }
-                      }
-                    })()}
-                    <div className={classes.chosenAttributes}>
-                      {attributes.map(({ type, value }, id) => (
-                        <div key={id}>
-                          {type === 'Color' ? (
-                            <div
-                              style={{ backgroundColor: value }}
-                              className={classes.attributes}
-                            ></div>
-                          ) : (
-                            <div className={classes.attributes}>
-                              <span>{value}</span>
-                            </div>
-                          )}
-                        </div>
-                      ))}
+                      >
+                        -
+                      </button>
+                    </div>
+                    <div className={classes.imgContainer}>
+                      <img className={classes.img} src={pic[0]} alt='product' />
                     </div>
                   </div>
-                  <div className={classes.buttons}>
-                    <button
-                      onClick={() =>
-                        this.props.incrementCount({
-                          name: name,
-                          attributes: attributes,
-                        })
-                      }
-                    >
-                      +
-                    </button>
-                    <p>{count}</p>
-                    <button
-                      onClick={() =>
-                        this.props.decrementCount({
-                          name: name,
-                          attributes: attributes,
-                        })
-                      }
-                    >
-                      -
-                    </button>
-                  </div>
-                  <div className={classes.imgContainer}>
-                    <img className={classes.img} src={pic} alt='product' />
-                  </div>
-                </div>
-              ),
-            )}
+                ),
+              )}
+            </div>
             <div className={classes.finalPrice}>
               <p>Total</p>
               <p>
@@ -145,7 +160,11 @@ class MiniCart extends Component {
               </p>
             </div>
             <div className={classes.buttonDiv}>
-              <Link className={classes.bag} to='/cart'>
+              <Link
+                className={classes.bag}
+                to='/cart'
+                onClick={() => this.props.toggleCart()}
+              >
                 VIEW BAG
               </Link>
               <button
@@ -155,6 +174,7 @@ class MiniCart extends Component {
                     this.props.removeCart()
                     alert('Purchased')
                   }
+                  this.props.toggleCart()
                 }}
               >
                 CHECK OUT
