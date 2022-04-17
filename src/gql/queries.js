@@ -13,6 +13,7 @@ export const GET_PRODUCT_BY_CATEGORY = gql`
           amount
           currency {
             label
+            symbol
           }
         }
       }

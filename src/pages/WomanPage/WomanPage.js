@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Header from '../../components/Header/Header'
 import Category from '../../components/Category/Category'
 import { connect } from 'react-redux'
 import client from '../../client'
@@ -17,12 +16,12 @@ class WomanPage extends Component {
         input: 'clothes',
       },
     })
+    console.log(data)
     this.setState(data)
   }
   render() {
     return (
       <>
-        <Header />
         <Category products={this.state} currency={this.props?.currency} />
       </>
     )

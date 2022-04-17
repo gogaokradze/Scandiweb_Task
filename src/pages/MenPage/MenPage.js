@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Header from '../../components/Header/Header'
 import Category from '../../components/Category/Category'
 import client from '../../client'
 import { GET_PRODUCT_BY_CATEGORY } from '../../gql/queries'
@@ -22,7 +21,6 @@ class MenPage extends Component {
   render() {
     return (
       <>
-        <Header />
         <Category products={this.state} currency={this.props?.currency} />
       </>
     )

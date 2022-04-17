@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Header from '../../components/Header/Header'
 import { connect } from 'react-redux'
 import classes from './CartPage.module.css'
 import { incrementCount, decrementCount } from '../../store/cart/cartActions'
@@ -8,7 +7,6 @@ class CartPage extends Component {
   render() {
     return (
       <div>
-        <Header />
         <div
           className={`${classes.main} ${
             this.props.active ? `${classes.active}` : ''
@@ -19,7 +17,7 @@ class CartPage extends Component {
             {this.props.cart.length === 0 && (
               <h1 className={classes.message}>Cart is empty</h1>
             )}
-            {this.props.cart?.map(
+            {this.props.cart.map(
               ({ name, brand, pic, price, attributes, count }, index) => {
                 return (
                   <div key={index} className={classes.products}>
