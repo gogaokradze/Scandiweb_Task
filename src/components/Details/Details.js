@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { gql } from '@apollo/client'
 import client from '../../client'
 import classes from './Details.module.css'
 import { connect } from 'react-redux'
 import { setCart } from '../../store/cart/cartActions'
+import { GET_PRODUCT_QUERY } from '../../gql/queries'
+import DOMPurify from 'dompurify'
 
 class Details extends Component {
   constructor(props) {
@@ -18,33 +19,7 @@ class Details extends Component {
   async componentDidMount() {
     const { match } = this.props
     const { data } = await client.query({
-      query: gql`
-        query ($id: String!) {
-          product(id: $id) {
-            name
-            id
-            inStock
-            gallery
-            description
-            attributes {
-              name
-              type
-              items {
-                displayValue
-                value
-              }
-            }
-            brand
-            prices {
-              amount
-              currency {
-                label
-                symbol
-              }
-            }
-          }
-        }
-      `,
+      query: GET_PRODUCT_QUERY,
       variables: {
         id: match.params.id,
       },
@@ -210,7 +185,9 @@ class Details extends Component {
               </form>
               <p
                 className={classes.description}
-                dangerouslySetInnerHTML={{ __html: item?.description }}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(item?.description),
+                }}
               ></p>
             </div>
           </div>

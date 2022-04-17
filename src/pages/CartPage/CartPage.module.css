@@ -27,7 +27,7 @@
 }
 
 .main{
-   height: 100vh;
+   min-height: 100vh;
    padding-top:1rem;
    color:#1D1F22;
 }
@@ -50,31 +50,9 @@
   pointer-events: none;
 }
 
-.imgSwitcher{
-  position: absolute;
-  width: inherit;
-  display: flex;
-  justify-content: space-between;
-}
-
-.imgSwitcher button{
-  background: none;
-  border:none;
-  cursor: pointer;
-}
-
-.imgContainer{
-  width: 13rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .group{
   display: flex;
 }
-
-
 
 .buttons{
   display: flex;
@@ -117,7 +95,7 @@
 .products{
   display: flex;
   justify-content: space-between;
-  margin-bottom:1rem;
+  padding-bottom:1rem;
 }
 
 @media screen and (min-width: 1440px) {

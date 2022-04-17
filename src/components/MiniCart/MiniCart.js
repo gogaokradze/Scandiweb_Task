@@ -20,7 +20,7 @@ class MiniCart extends Component {
 
   handleClickOutside(event) {
     if (this.ref.current && !this.ref.current.contains(event.target)) {
-      if (this.props.active) this.props.toggleCart(false)
+      if (this.props.active) this.props.toggleCart()
     }
   }
 

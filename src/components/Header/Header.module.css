@@ -20,12 +20,6 @@
   justify-content: center;
 }
 
-.dropdown {
-  background: none;
-  border: none;
-  width:2rem;
-}
-
 .link{
   text-decoration: none;
   color:#1D1F22;
@@ -55,7 +49,7 @@
   padding-left: 5rem;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 810px) {
   .header{
     font-size: 0.8rem;
     max-width: 90vw;

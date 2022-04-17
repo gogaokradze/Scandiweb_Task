@@ -11,56 +11,8 @@ import MenPage from './pages/MenPage/MenPage'
 import KidsPage from './pages/KidsPage/KidsPage'
 import DetailsPage from './pages/DetailsPage/DetailsPage'
 import CartPage from './pages/CartPage/CartPage'
-import { connect } from 'react-redux'
-import { gql } from '@apollo/client'
-import client from './client'
-import { setCurrencies } from './store/currency/currencyActions'
-import { setProducts } from './store/products/productsActions'
 
-class App extends React.Component {
-  async componentDidMount() {
-    const { data } = await client.query({
-      query: gql`
-        query {
-          categories {
-            name
-            products {
-              id
-              name
-              inStock
-              gallery
-              description
-              attributes {
-                id
-                name
-                type
-                items {
-                  displayValue
-                  value
-                  id
-                }
-              }
-              prices {
-                currency {
-                  label
-                  symbol
-                }
-                amount
-              }
-              brand
-            }
-          }
-          currencies {
-            label
-            symbol
-          }
-        }
-      `,
-    })
-    this.props.setCurrencies(data.currencies)
-    this.props.setProducts(data.categories)
-  }
-
+export default class App extends React.Component {
   render() {
     return (
       <Router>
@@ -88,14 +40,3 @@ class App extends React.Component {
     )
   }
 }
-
-const mapStateToProps = state => ({
-  currencies: state.currency.currencies,
-})
-
-const mapDispatchToProps = dispatch => ({
-  setCurrencies: data => dispatch(setCurrencies(data)),
-  setProducts: data => dispatch(setProducts(data)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)

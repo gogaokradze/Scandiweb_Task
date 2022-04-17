@@ -13,10 +13,12 @@ class Category extends Component {
           this.props.active ? `${classes.active}` : ''
         }`}
       >
-        <h1 className={classes.title}>{this?.props?.products?.name}</h1>
+        <h1 className={classes.title}>
+          {this?.props?.products?.category?.name}
+        </h1>
 
         <div className={classes.products}>
-          {this?.props?.products?.products?.map(
+          {this?.props?.products?.category?.products?.map(
             ({ name, prices, gallery, id, inStock }, count) => {
               return (
                 <Link

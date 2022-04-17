@@ -2,16 +2,28 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Header from '../../components/Header/Header'
 import Category from '../../components/Category/Category'
+import client from '../../client'
+import { GET_PRODUCT_BY_CATEGORY } from '../../gql/queries'
 
 class KidsPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+  async componentDidMount() {
+    const { data } = await client.query({
+      query: GET_PRODUCT_BY_CATEGORY,
+      variables: {
+        input: 'all',
+      },
+    })
+    this.setState(data)
+  }
   render() {
     return (
       <>
         <Header />
-        <Category
-          products={this.props?.products[0]}
-          currency={this.props?.currency}
-        />
+        <Category products={this.state} currency={this.props?.currency} />
       </>
     )
   }
@@ -19,7 +31,6 @@ class KidsPage extends Component {
 
 const mapStateToProps = state => ({
   currency: state.currency.currency,
-  products: state.products,
 })
 
 export default connect(mapStateToProps)(KidsPage)

@@ -95,9 +95,9 @@ export const Back = () => (
     <path
       d='M7 13L1 7L7 1'
       stroke='#1D1F22'
-      stroke-width='2'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     />
   </svg>
 )
@@ -113,9 +113,27 @@ export const Next = () => (
     <path
       d='M1 13L7 7L1 1'
       stroke='#1D1F22'
-      stroke-width='2'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  </svg>
+)
+
+export const Vector = props => (
+  <svg
+    width='8'
+    height='4'
+    viewBox='0 0 8 4'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+    className={props.className}
+  >
+    <path
+      d='M1 0.5L4 3.5L7 0.5'
+      stroke='black'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     />
   </svg>
 )

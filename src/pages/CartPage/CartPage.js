@@ -3,15 +3,8 @@ import Header from '../../components/Header/Header'
 import { connect } from 'react-redux'
 import classes from './CartPage.module.css'
 import { incrementCount, decrementCount } from '../../store/cart/cartActions'
-import { Back, Next } from '../../svg/icons'
-
+import PictureButtons from '../../components/PictureButtons/PictureButtons'
 class CartPage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      currentPicture: 0,
-    }
-  }
   render() {
     return (
       <div>
@@ -27,147 +20,105 @@ class CartPage extends Component {
               <h1 className={classes.message}>Cart is empty</h1>
             )}
             {this.props.cart?.map(
-              ({ name, brand, pic, price, attributes, count }, id) => (
-                <div key={id} className={classes.products}>
-                  <div className={classes.product}>
-                    <p className={classes.brand}>{brand}</p>
-                    <p className={classes.name}>{name}</p>
-                    {(() => {
-                      switch (this?.props?.currency) {
-                        case '$': {
-                          return (
-                            <p>
-                              {price[0]?.currency.symbol}
-                              {(price[0]?.amount).toFixed(2)}
-                            </p>
-                          )
+              ({ name, brand, pic, price, attributes, count }, index) => {
+                return (
+                  <div key={index} className={classes.products}>
+                    <div className={classes.product}>
+                      <p className={classes.brand}>{brand}</p>
+                      <p className={classes.name}>{name}</p>
+                      {(() => {
+                        switch (this?.props?.currency) {
+                          case '$': {
+                            return (
+                              <p>
+                                {price[0]?.currency.symbol}
+                                {(price[0]?.amount).toFixed(2)}
+                              </p>
+                            )
+                          }
+                          case '£': {
+                            return (
+                              <p>
+                                {price[1]?.currency.symbol}
+                                {(price[1]?.amount).toFixed(2)}
+                              </p>
+                            )
+                          }
+                          case 'A$': {
+                            return (
+                              <p>
+                                {price[2]?.currency.symbol}
+                                {(price[2]?.amount).toFixed(2)}
+                              </p>
+                            )
+                          }
+                          case '¥': {
+                            return (
+                              <p>
+                                {price[3]?.currency.symbol}
+                                {(price[3]?.amount).toFixed(2)}
+                              </p>
+                            )
+                          }
+                          case '₽': {
+                            return (
+                              <p>
+                                {price[4]?.currency.symbol}
+                                {(price[4]?.amount).toFixed(2)}
+                              </p>
+                            )
+                          }
+                          default: {
+                            return <p>Bye</p>
+                          }
                         }
-                        case '£': {
-                          return (
-                            <p>
-                              {price[1]?.currency.symbol}
-                              {(price[1]?.amount).toFixed(2)}
-                            </p>
-                          )
-                        }
-                        case 'A$': {
-                          return (
-                            <p>
-                              {price[2]?.currency.symbol}
-                              {(price[2]?.amount).toFixed(2)}
-                            </p>
-                          )
-                        }
-                        case '¥': {
-                          return (
-                            <p>
-                              {price[3]?.currency.symbol}
-                              {(price[3]?.amount).toFixed(2)}
-                            </p>
-                          )
-                        }
-                        case '₽': {
-                          return (
-                            <p>
-                              {price[4]?.currency.symbol}
-                              {(price[4]?.amount).toFixed(2)}
-                            </p>
-                          )
-                        }
-                        default: {
-                          return <p>Bye</p>
-                        }
-                      }
-                    })()}
-                    <div className={classes.chosenAttributes}>
-                      {attributes.map(({ type, value }, id) => (
-                        <div key={id}>
-                          {type === 'Color' ? (
-                            <div
-                              style={{ backgroundColor: value }}
-                              className={classes.attributes}
-                            ></div>
-                          ) : (
-                            <div className={classes.attributes}>
-                              <span>{value}</span>
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className={classes.group}>
-                    <div className={classes.buttons}>
-                      <button
-                        onClick={() =>
-                          this.props.incrementCount({
-                            name: name,
-                            attributes: attributes,
-                          })
-                        }
-                      >
-                        +
-                      </button>
-                      <p>{count}</p>
-                      <button
-                        onClick={() =>
-                          this.props.decrementCount({
-                            name: name,
-                            attributes: attributes,
-                          })
-                        }
-                      >
-                        -
-                      </button>
-                    </div>
-                    <div className={classes.imgContainer}>
-                      <img
-                        className={classes.img}
-                        src={pic[this.state.currentPicture]}
-                        alt='product'
-                      />
-                      <div className={classes.imgSwitcher}>
-                        <button
-                          onClick={() => {
-                            this.setState(prevState => {
-                              if (prevState.currentPicture === 0) {
-                                return {
-                                  currentPicture: pic.length - 1,
-                                }
-                              } else {
-                                return {
-                                  currentPicture:
-                                    (prevState.currentPicture -= 1),
-                                }
-                              }
-                            })
-                          }}
-                        >
-                          <Back />
-                        </button>
-                        <button
-                          onClick={() => {
-                            this.setState(prevState => {
-                              if (prevState.currentPicture < pic.length - 1) {
-                                return {
-                                  currentPicture:
-                                    (prevState.currentPicture += 1),
-                                }
-                              } else {
-                                return {
-                                  currentPicture: 0,
-                                }
-                              }
-                            })
-                          }}
-                        >
-                          <Next />
-                        </button>
+                      })()}
+                      <div className={classes.chosenAttributes}>
+                        {attributes.map(({ type, value }, id) => (
+                          <div key={id}>
+                            {type === 'Color' ? (
+                              <div
+                                style={{ backgroundColor: value }}
+                                className={classes.attributes}
+                              ></div>
+                            ) : (
+                              <div className={classes.attributes}>
+                                <span>{value}</span>
+                              </div>
+                            )}
+                          </div>
+                        ))}
                       </div>
                     </div>
+                    <div className={classes.group}>
+                      <div className={classes.buttons}>
+                        <button
+                          onClick={() =>
+                            this.props.incrementCount({
+                              name: name,
+                              attributes: attributes,
+                            })
+                          }
+                        >
+                          +
+                        </button>
+                        <p>{count}</p>
+                        <button
+                          onClick={() =>
+                            this.props.decrementCount({
+                              name: name,
+                              attributes: attributes,
+                            })
+                          }
+                        >
+                          -
+                        </button>
+                      </div>
+                      <PictureButtons pictures={pic} />
+                    </div>
                   </div>
-                </div>
-              ),
+                )
+              },
             )}
           </div>
         </div>
