@@ -73,16 +73,19 @@ class CartPage extends Component {
                       })()}
                       <div className={classes.chosenAttributes}>
                         {attributes.map(({ type, value }, id) => (
-                          <div key={id}>
+                          <div key={id} className={classes.meaning}>
                             {type === 'Color' ? (
                               <div
                                 style={{ backgroundColor: value }}
                                 className={classes.attributes}
                               ></div>
                             ) : (
-                              <div className={classes.attributes}>
-                                <span>{value}</span>
-                              </div>
+                              <>
+                                <label className={classes.type}>{type}</label>
+                                <div className={classes.attributes}>
+                                  <span>{value}</span>
+                                </div>
+                              </>
                             )}
                           </div>
                         ))}

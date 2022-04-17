@@ -44,6 +44,23 @@
   font-size: 0.5rem;
   font-weight: 900;
 }
+.meaning{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.type{
+  display: inline-block;
+  font-size:0.5rem;
+  min-height: 1.5rem;
+  padding:0;
+  margin:0;
+  line-height: 1;
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+}
 
 .something{
   max-height: 40vh;
@@ -63,7 +80,7 @@
   width: 15%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -153,9 +170,10 @@
 
 @media screen and (min-width: 1440px) {
   .miniCart {
-    font-size:1rem;
+    font-size:1.2rem;
     padding-top:1rem;
   }
+
   .product p{
     font-size: 1rem;
     margin:0.7rem auto;

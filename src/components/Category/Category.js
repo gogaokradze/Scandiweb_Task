@@ -41,7 +41,6 @@ class Category extends Component {
                     )}
                     <p className={classes.name}>{name}</p>
                     {(() => {
-                      console.log('abee', prices[0].currency)
                       switch (this?.props?.currency) {
                         case '$': {
                           return (
