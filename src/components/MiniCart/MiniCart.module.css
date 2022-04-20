@@ -34,11 +34,12 @@
   height: 1.5rem;
   border: 1px solid #1D1F22;
   box-sizing: border-box;
-  margin: 0.2rem;
+  margin: 0.1rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 
 .attributes span {
   font-size: 0.5rem;
@@ -70,6 +71,13 @@
 
 .chosenAttributes{
   display: flex;
+  flex-direction: column;
+}
+
+
+.wrapper{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .product{
@@ -94,7 +102,19 @@
 
 .product p{
   font-size: 0.8rem;
-  margin:0.5rem auto;
+  margin:0.1rem auto;
+}
+.chosenAttributes .attributeName{
+  font-size: 0.6rem;
+}
+
+.chosen{
+  background-color: #1D1F22;
+  color:white;
+}
+.chosenColor{
+  border:1.5px solid #fe3b1f;
+  box-sizing: border-box;
 }
 
 .counter{

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import Category from '../../components/Category/Category'
 import { connect } from 'react-redux'
+import Category from '../../components/Category/Category'
 import client from '../../client'
 import { GET_PRODUCT_BY_CATEGORY } from '../../gql/queries'
+import { withRouter } from 'react-router-dom'
 
-class WomanPage extends Component {
+class CategoriesPage extends Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -13,10 +14,9 @@ class WomanPage extends Component {
     const { data } = await client.query({
       query: GET_PRODUCT_BY_CATEGORY,
       variables: {
-        input: 'clothes',
+        input: this.props.location.pathname.slice(1),
       },
     })
-    console.log(data)
     this.setState(data)
   }
   render() {
@@ -32,4 +32,4 @@ const mapStateToProps = state => ({
   currency: state.currency.currency,
 })
 
-export default connect(mapStateToProps)(WomanPage)
+export default connect(mapStateToProps)(withRouter(CategoriesPage))

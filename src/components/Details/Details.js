@@ -38,7 +38,8 @@ class Details extends Component {
       value: formObject[e],
     }))
     this.props.setCart({
-      attributes: result,
+      attributes: this.state.data?.attributes,
+      chosenAttributes: result,
       name: this.state.data?.name,
       brand: this.state.data?.brand,
       price: this.state.data.prices,
@@ -175,13 +176,17 @@ class Details extends Component {
                     }
                   })()}
                 </div>
-                <button
-                  className={classes.button}
-                  disabled={!item?.inStock}
-                  type='submit'
-                >
-                  ADD TO CART
-                </button>
+                {item?.inStock ? (
+                  <button
+                    className={classes.button}
+                    disabled={!item?.inStock}
+                    type='submit'
+                  >
+                    ADD TO CART
+                  </button>
+                ) : (
+                  <p>OUT OF STOCK</p>
+                )}
               </form>
               <p
                 className={classes.description}

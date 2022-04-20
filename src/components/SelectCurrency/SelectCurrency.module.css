@@ -12,6 +12,10 @@
   cursor: pointer;
 }
 
+.dropdownItem:hover{
+    background-color: #8d9199;
+}
+
 .dropdownBtn span{
   margin-left:0.5rem;
 }
@@ -40,6 +44,7 @@
   cursor: pointer;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 .symbol{
   width: 20%;

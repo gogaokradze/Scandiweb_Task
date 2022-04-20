@@ -54,7 +54,18 @@ class MiniCart extends Component {
             </p>
             <div className={classes.something}>
               {this.props.cart?.map(
-                ({ name, brand, pic, price, attributes, count }, id) => (
+                (
+                  {
+                    name,
+                    brand,
+                    pic,
+                    price,
+                    attributes,
+                    count,
+                    chosenAttributes,
+                  },
+                  id,
+                ) => (
                   <div key={id} className={classes.products}>
                     <div className={classes.product}>
                       <p className={classes.name}>{name}</p>
@@ -107,7 +118,42 @@ class MiniCart extends Component {
                         }
                       })()}
                       <div className={classes.chosenAttributes}>
-                        {attributes.map(({ type, value }, id) => (
+                        {attributes.map(({ name, items }, id) => {
+                          return (
+                            <div key={id}>
+                              <p className={classes.attributeName}>{name}</p>
+                              <div className={classes.wrapper}>
+                                {items.map(({ value }, index) => (
+                                  <div key={index}>
+                                    {name === 'Color' ? (
+                                      <div
+                                        style={{ backgroundColor: value }}
+                                        className={`${classes.attributes} ${
+                                          value === chosenAttributes[id].value
+                                            ? `${classes.chosenColor}`
+                                            : ''
+                                        }`}
+                                      ></div>
+                                    ) : (
+                                      <>
+                                        <div
+                                          className={`${classes.attributes} ${
+                                            value === chosenAttributes[id].value
+                                              ? `${classes.chosen}`
+                                              : ''
+                                          }`}
+                                        >
+                                          <span>{value}</span>
+                                        </div>
+                                      </>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )
+                        })}
+                        {/* {attributes.map(({ type, value }, id) => (
                           <div className={classes.meaning} key={id}>
                             {type === 'Color' ? (
                               <div
@@ -123,7 +169,7 @@ class MiniCart extends Component {
                               </>
                             )}
                           </div>
-                        ))}
+                        ))} */}
                       </div>
                     </div>
                     <div className={classes.buttons}>
@@ -152,6 +198,13 @@ class MiniCart extends Component {
                     <div className={classes.imgContainer}>
                       <img className={classes.img} src={pic[0]} alt='product' />
                     </div>
+                    {/* <button
+                      onClick={() =>
+                        console.log(fullAttributes, 'sd', attributes)
+                      }
+                    >
+                      testttt
+                    </button> */}
                   </div>
                 ),
               )}

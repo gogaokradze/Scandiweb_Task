@@ -90,6 +90,12 @@
 
 .chosenAttributes{
   display: flex;
+  flex-direction: column;
+}
+
+.chosenAttributes .attributeName{
+  font-size: 0.8rem;
+  margin:0.6rem auto;
 }
 
 .meaning{
@@ -109,6 +115,19 @@
   display: flex;
   align-items: flex-end;
   text-align: center;
+}
+.wrapper{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chosen{
+  background-color: #1D1F22;
+  color:white;
+}
+.chosenColor{
+  border:1.5px solid #fe3b1f;
+  box-sizing: border-box;
 }
 
 .products{

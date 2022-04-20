@@ -6,12 +6,10 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
-import WomenPage from './pages/WomanPage/WomanPage'
-import MenPage from './pages/MenPage/MenPage'
-import KidsPage from './pages/KidsPage/KidsPage'
 import DetailsPage from './pages/DetailsPage/DetailsPage'
 import CartPage from './pages/CartPage/CartPage'
 import Header from './components/Header/Header'
+import CategoriesPage from './pages/CategoriesPage/CategoriesPage'
 
 export default class App extends React.Component {
   render() {
@@ -21,16 +19,16 @@ export default class App extends React.Component {
           <Header />
           <Switch>
             <Route exact path='/'>
-              <Redirect to='/women' />
+              <Redirect to='/all' />
             </Route>
-            <Route path='/women' exact>
-              <WomenPage />
+            <Route path='/clothes' exact>
+              <CategoriesPage key='clothes' />
             </Route>
-            <Route path='/men' exact>
-              <MenPage />
+            <Route path='/tech' exact>
+              <CategoriesPage key='tech' />
             </Route>
-            <Route path='/kids' exact>
-              <KidsPage />
+            <Route path='/all' exact>
+              <CategoriesPage key='all' />
             </Route>
             <Route path='/cart' exact>
               <CartPage />

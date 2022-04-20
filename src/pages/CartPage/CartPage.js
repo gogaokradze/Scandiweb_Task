@@ -18,7 +18,18 @@ class CartPage extends Component {
               <h1 className={classes.message}>Cart is empty</h1>
             )}
             {this.props.cart.map(
-              ({ name, brand, pic, price, attributes, count }, index) => {
+              (
+                {
+                  name,
+                  brand,
+                  pic,
+                  price,
+                  attributes,
+                  count,
+                  chosenAttributes,
+                },
+                index,
+              ) => {
                 return (
                   <div key={index} className={classes.products}>
                     <div className={classes.product}>
@@ -72,23 +83,41 @@ class CartPage extends Component {
                         }
                       })()}
                       <div className={classes.chosenAttributes}>
-                        {attributes.map(({ type, value }, id) => (
-                          <div key={id} className={classes.meaning}>
-                            {type === 'Color' ? (
-                              <div
-                                style={{ backgroundColor: value }}
-                                className={classes.attributes}
-                              ></div>
-                            ) : (
-                              <>
-                                <label className={classes.type}>{type}</label>
-                                <div className={classes.attributes}>
-                                  <span>{value}</span>
-                                </div>
-                              </>
-                            )}
-                          </div>
-                        ))}
+                        {attributes.map(({ name, items }, id) => {
+                          return (
+                            <div key={id}>
+                              <p className={classes.attributeName}>{name}</p>
+                              <div className={classes.wrapper}>
+                                {items.map(({ value }, index) => (
+                                  <div key={index}>
+                                    {name === 'Color' ? (
+                                      <div
+                                        style={{ backgroundColor: value }}
+                                        className={`${classes.attributes} ${
+                                          value === chosenAttributes[id].value
+                                            ? `${classes.chosenColor}`
+                                            : ''
+                                        }`}
+                                      ></div>
+                                    ) : (
+                                      <>
+                                        <div
+                                          className={`${classes.attributes} ${
+                                            value === chosenAttributes[id].value
+                                              ? `${classes.chosen}`
+                                              : ''
+                                          }`}
+                                        >
+                                          <span>{value}</span>
+                                        </div>
+                                      </>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )
+                        })}
                       </div>
                     </div>
                     <div className={classes.group}>

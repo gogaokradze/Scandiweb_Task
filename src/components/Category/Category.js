@@ -3,8 +3,28 @@ import classes from './Category.module.css'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { AddCart } from '../../svg/icons'
+import { setCart } from '../../store/cart/cartActions'
 
 class Category extends Component {
+  constructor(props) {
+    super(props)
+    this.addProduct = this.addProduct.bind(this)
+  }
+  addProduct(attributes, name, prices, gallery, brand) {
+    const array = []
+    attributes.forEach(data => {
+      array.push({ type: data.name, value: data.items[0].value })
+    })
+    this.props.setCart({
+      attributes: attributes,
+      chosenAttributes: array,
+      name,
+      brand,
+      price: prices,
+      pic: gallery,
+      count: 1,
+    })
+  }
   render() {
     const { location } = this.props
     return (
@@ -17,7 +37,10 @@ class Category extends Component {
 
         <div className={classes.products}>
           {this.props.products?.category?.products?.map(
-            ({ name, prices, gallery, id, inStock }, count) => {
+            (
+              { name, prices, gallery, id, inStock, attributes, brand },
+              count,
+            ) => {
               return (
                 <Link
                   className={classes.link}
@@ -32,9 +55,23 @@ class Category extends Component {
                         !inStock ? `${classes.noStock}` : ''
                       }`}
                     ></img>
-                    <button className={classes.addButton}>
-                      <AddCart />
-                    </button>
+                    {inStock && (
+                      <button
+                        className={classes.addButton}
+                        onClick={e => {
+                          e.preventDefault()
+                          this.addProduct(
+                            attributes,
+                            name,
+                            prices,
+                            gallery,
+                            brand,
+                          )
+                        }}
+                      >
+                        <AddCart />
+                      </button>
+                    )}
 
                     {!inStock && (
                       <p className={classes.message}>OUT OF STOCK</p>
@@ -95,4 +132,11 @@ class Category extends Component {
 
 const mapStateToProps = state => ({ active: state.cart.active })
 
-export default connect(mapStateToProps)(withRouter(Category))
+const mapDispatchToProps = dispatch => ({
+  setCart: data => dispatch(setCart(data)),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withRouter(Category))
